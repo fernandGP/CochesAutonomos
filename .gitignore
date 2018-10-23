@@ -70,3 +70,7 @@ Thumbs.db
 # --------
 *.dll
 *.exe
+
+# Cosas de QTCreator
+CochesAutonomosG.pro.user
+CochesAutonomosG.pro.user.e54a1f6
