@@ -1,4 +1,4 @@
-#include "celdagrafica.h"
+#include "../headers/celdagrafica.h"
 
 CeldaGrafica::CeldaGrafica(int valor): valor_(valor), QPushButton()
 {

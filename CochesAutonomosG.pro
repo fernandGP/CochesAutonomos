@@ -24,19 +24,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp \
-    celda.cpp \
-    mapa.cpp \
-    celdagrafica.cpp \
-    mapagrafico.cpp
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/celda.cpp \
+    src/mapa.cpp \
+    src/celdagrafica.cpp \
+    src/mapagrafico.cpp
 
 HEADERS += \
-    mainwindow.h \
-    celda.h \
-    mapa.h \
-    celdagrafica.h \
-    mapagrafico.h
+    headers/mainwindow.h \
+    headers/celda.h \
+    headers/mapa.h \
+    headers/celdagrafica.h \
+    headers/mapagrafico.h
 
 #FORMS += \
 #        mainwindow.ui

@@ -1,5 +1,5 @@
-#include "mapa.h"
-#include "mainwindow.h"
+#include "../headers/mapa.h"
+#include "../headers/mainwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

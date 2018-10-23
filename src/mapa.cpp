@@ -1,4 +1,4 @@
-#include "mapa.h"
+#include "../headers/mapa.h"
 
 void Mapa::addObstaculos(bool mod){
 

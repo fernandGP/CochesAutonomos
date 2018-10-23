@@ -1,4 +1,4 @@
-#include "celda.h"
+#include "../headers/celda.h"
 
 Celda::Celda():valor_(0){}
 
