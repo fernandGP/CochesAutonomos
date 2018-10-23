@@ -3,7 +3,15 @@
 void Mapa::addObstaculos(bool mod){
 
     if(mod){    //Modo guiado
+        int x, y;
+        ifstream InputFile;
+        InputFile.open ("coordenadas.txt", ios::in);
 
+        while(!InputFile.eof()){
+            InputFile >> x >> y;
+            rejilla_[x][y].setValor(1);
+        }
+        InputFile.close();
     }
     else{       //Asignación automática
         for(int i = 0; i < rejilla_.size(); i++){

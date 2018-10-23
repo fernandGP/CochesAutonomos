@@ -5,6 +5,8 @@
 #define CONST_N_PEATONES 20
 
 #include <vector>
+#include <sstream>
+#include <fstream>
 #include "celda.h"
 
 using namespace std;
