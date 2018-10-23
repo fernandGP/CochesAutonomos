@@ -40,3 +40,6 @@ HEADERS += \
 
 #FORMS += \
 #        mainwindow.ui
+
+FORMS += \
+    mainwindow.ui
