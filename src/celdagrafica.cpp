@@ -27,3 +27,7 @@ CeldaGrafica::CeldaGrafica(int valor): valor_(valor), QPushButton()
 }
 
 CeldaGrafica::~CeldaGrafica(){}
+
+void CeldaGrafica::setValor(int val){ valor_ = val; }
+
+int CeldaGrafica::getValor(){ return valor_; }

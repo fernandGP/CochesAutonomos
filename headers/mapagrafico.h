@@ -2,6 +2,7 @@
 #define MAPAGRAFICO_H
 
 #include <QGridLayout>
+#include <fstream>
 #include "celdagrafica.h"
 
 using namespace std;
@@ -32,10 +33,11 @@ private:
     void addPeatones();
 
 public:
-    explicit MapaGrafico(int x = 10, int y = 10, int pObst = 20, int nPeatones_ = 10);
+    explicit MapaGrafico(int x = 10, int y = 10, int pObst = 20, int nPeatones_ = 10, bool opt = 0);
     virtual ~MapaGrafico();
 
     void visualizar();                              //Redundante en el modo grafico
+
 };
 
 #endif // MAPAGRAFICO_H

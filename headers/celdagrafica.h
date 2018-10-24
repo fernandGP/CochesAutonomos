@@ -28,6 +28,9 @@ private:
 public:
     explicit CeldaGrafica(int valor = 0);
     virtual ~CeldaGrafica();
+
+    void setValor(int val);
+    int getValor();
 };
 
 #endif // CELDAGRAFICA_H
