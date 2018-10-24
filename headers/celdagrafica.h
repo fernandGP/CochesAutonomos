@@ -6,15 +6,15 @@
 #include <QObject>
 #include <QString>
 
-/** class CeldaGrafica: Expresión de la celda en la interfaz gráfica.
+/** CeldaGrafica: Expresión de la celda en la interfaz gráfica.
  * Hereda de la clase de QT "QPushButton".
  * Documentación: http://doc.qt.io/archives/qt-4.8/qpushbutton.html
  */
 class CeldaGrafica : public QPushButton
 {
     /** Q_OBJECT: Constante que utiliza QT, para indicar al programa que se debe autogenerar
-     * páginas de código que permite al objeto con la constante definida funcionar como lo haría
-     * un QObject.
+     *   páginas de código que permite al objeto con la constante definida funcionar como lo haría
+     *   un QObject.
      */
     Q_OBJECT
 

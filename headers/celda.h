@@ -3,6 +3,11 @@
 
 #include <iostream>
 
+/**
+ * Celda: Define, en la línea de comandos, las celdas que componen
+ *   el mapa. Cada celda puede estar vacía, contener obstáculos o
+ *   el vehículo.
+ */
 class Celda
 {
 private:
