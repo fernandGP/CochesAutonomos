@@ -1,26 +1,24 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "mapagrafico.h"
+#include <QtGui>
+#include <QMainWindow>
+#include "../headers/mapagrafico.h"
 
-/**
- * MainWindow: Ventana gŕafica que contiene los elementos visuales
- *   del programa.
- */
-class MainWindow : public QWidget
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
 {
-    /** Q_OBJECT: Constante que utiliza QT, para indicar al programa que se debe autogenerar
-     *   páginas de código que permite al objeto con la constante definida funcionar como lo haría
-     *   un QObject.
-     */
     Q_OBJECT
 
 public:
-    explicit MainWindow(QGridLayout *layout = 0);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private:
-
+    Ui::MainWindow *ui;
 };
 
 #endif // MAINWINDOW_H
