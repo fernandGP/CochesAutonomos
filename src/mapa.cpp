@@ -14,8 +14,9 @@ void Mapa::addObstaculos(bool mod){
         InputFile.close();
     }
     else{       //Asignación automática
-        for(int i = 0; i < rejilla_.size(); i++){
-            for(int j = 0; j < rejilla_[i].size(); j++){
+        rejilla_.clear();
+        for(unsigned int i = 0; i < rejilla_.size(); i++){
+            for(unsigned int j = 0; j < rejilla_[i].size(); j++){
                 if(rand()%100 < porcentajeObstaculos_)  rejilla_[i][j].setValor(1);
             }
         }

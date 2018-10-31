@@ -19,6 +19,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    MapaGrafico* mapa;
 };
 
 #endif // MAINWINDOW_H

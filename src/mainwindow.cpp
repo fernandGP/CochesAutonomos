@@ -8,7 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QWidget* w = new QWidget;
-    w -> setLayout(new MapaGrafico);
+    mapa = new MapaGrafico;
+
+    w -> setLayout(mapa);
 
     setCentralWidget(w);
 
