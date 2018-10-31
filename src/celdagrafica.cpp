@@ -3,8 +3,8 @@
 CeldaGrafica::CeldaGrafica(int valor): valor_(valor), QPushButton()
 {
 
-    setFixedHeight(30);
-    setFixedWidth(30);
+    setFixedHeight(52);
+    setFixedWidth(52);
 
     switch (valor_){
     case 0: {
@@ -27,3 +27,27 @@ CeldaGrafica::CeldaGrafica(int valor): valor_(valor), QPushButton()
 }
 
 CeldaGrafica::~CeldaGrafica(){}
+
+void CeldaGrafica::setValor(int val){
+    valor_ = val;
+    switch (valor_){
+    case 0: {
+        setText(" ");
+        break;
+    }
+    case 1: {
+        setText("0");
+        break;
+    }
+    case 2: {
+        setText("!");
+        break;
+    }
+    default: {
+        //throw a excepción personalizada
+        break;
+    }
+    }
+}
+
+int CeldaGrafica::getValor(){ return valor_; }

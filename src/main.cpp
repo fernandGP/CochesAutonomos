@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     cout << "2. Modo Gráfico" << endl;
     cin >> option;
 
+
     if(option == 1){
         int obs, pea;
         cout << "¿Cuánto porcentaje de obstáculos quiere?" << endl;
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
     else if(option == 2){
         QApplication a(argc, argv);
 
-        QWidget *w = new MainWindow(new MapaGrafico());
+        MainWindow *w = new MainWindow(new QWidget);
 
         w -> show();
 

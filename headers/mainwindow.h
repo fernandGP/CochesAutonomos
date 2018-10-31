@@ -1,18 +1,25 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "mapagrafico.h"
+#include <QtGui>
+#include <QMainWindow>
+#include "../headers/mapagrafico.h"
 
-class MainWindow : public QWidget
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QGridLayout *layout = 0);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private:
-
+    Ui::MainWindow *ui;
+    MapaGrafico* mapa;
 };
 
 #endif // MAINWINDOW_H

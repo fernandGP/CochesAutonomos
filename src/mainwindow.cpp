@@ -1,8 +1,25 @@
 #include "../headers/mainwindow.h"
+#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QGridLayout *layout): QWidget(){
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
 
-    setLayout(layout);
+    QWidget* w = new QWidget;
+    mapa = new MapaGrafico;
+
+    w -> setLayout(mapa);
+
+    setCentralWidget(w);
+
+    //setFixedSize(600,600);
 }
 
-MainWindow::~MainWindow(){}
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+

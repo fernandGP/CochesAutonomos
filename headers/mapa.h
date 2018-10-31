@@ -10,15 +10,33 @@
 #include "celda.h"
 
 using namespace std;
+
+/**
+ * Mapa: Matriz de celdas, implementada en la línea de comandos. Desde ella se
+ *   gestionan las celdas y sus propiedades.
+ */
 class Mapa{
 
 private:
+    /**
+     * rejilla_: Matriz de celdas.
+     * porcentajeObstaculos_: Porcentaje que define la cantidad de celdas que
+     *   contendrán obstáculos.
+     * nPeatones_: Contiene el número de peatones desplegados por el mapa.
+     * x_, y_; Tamaño del mapa (anchura y altura).
+     */
     vector<vector<Celda> > rejilla_;
     int porcentajeObstaculos_;
     int nPeatones_;
     int x_, y_;
 
-    void addObstaculos(bool mod);                   //mod indica el tipo de creación de obstáculos. Manual o auto
+    /**
+     * addObstaculos: Añade obstáculos en las celdas del mapa.
+     * mod: Booleano que permite alternar la entrada de obstáculos en el mapa:
+     *  mod true: Se añaden los obstáculos desde un archivo que los contiene.
+     *  mod false: Los obstáculos se generan aleatoriamente.
+     */
+    void addObstaculos(bool mod);
     void addPeatones();
 
 public:
