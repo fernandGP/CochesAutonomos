@@ -1,9 +1,7 @@
 #include "../headers/mapagrafico.h"
 
 MapaGrafico::MapaGrafico(int x, int y, int pObst, int nPeatones, bool opt):
-x_(x), y_(y), porcentajeObstaculos_(pObst), nPeatones_(nPeatones),
-QGridLayout()
-{
+QGridLayout(), x_(x), y_(y), porcentajeObstaculos_(pObst), nPeatones_(nPeatones){
 
 
     for(int i = 0; i < 10; i++) {

@@ -8,6 +8,8 @@
 #include <sstream>
 #include <fstream>
 #include "celda.h"
+//#include <set>
+#include <cmath>
 
 using namespace std;
 
@@ -38,12 +40,19 @@ private:
      */
     void addObstaculos(bool mod);
     void addPeatones();
+    int fHeuristica(const Celda&, const Celda&);
+
+    void setVecinos();
+    bool is_in_set(const Celda&, const std::vector<Celda>&);
+
+    void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
 
 public:
     Mapa(int x, int y, int pObst, int nPeatones_);
     ~Mapa();
 
     void visualizar();
+    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 };
 
 #endif // MAPA_H

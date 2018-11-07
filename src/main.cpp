@@ -1,4 +1,5 @@
 #include "../headers/mapa.h"
+<<<<<<< HEAD
 #include "../headers/mainwindow.h"
 #include <QApplication>
 #include <unistd.h>
@@ -35,4 +36,22 @@ int main(int argc, char *argv[])
 
         return a.exec();
     }
+=======
+//#include "../headers/mainwindow.h"
+//#include <QApplication>
+//#include <iostream>
+//#include <ctime>
+
+int main(int argc, char *argv[])
+{
+
+    Mapa mapa(5, 5, 20, 2);
+    vector<Celda> result = mapa.Astar(0,0, 4,4);
+    mapa.visualizar();
+    /*for(int i = result.size()-1; i >= 0; i--){
+        cout << "(" << result[i].getX() << "," << result[i].getY() << ")"
+             << endl;
+    }*/
+    return 0;
+>>>>>>> a* funcionando
 }
