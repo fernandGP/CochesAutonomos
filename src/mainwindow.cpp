@@ -9,10 +9,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QWidget* w = new QWidget;
     mapa = new MapaGrafico;
+    menu = new Menu;
 
     w -> setLayout(mapa);
 
+
     setCentralWidget(w);
+    addToolBar(menu);
 
     //setFixedSize(600,600);
 }

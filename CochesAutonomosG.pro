@@ -10,7 +10,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = CochesAutonomosG
 TEMPLATE = app
-CONFIG += console
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -30,14 +29,17 @@ SOURCES += \
     src/mapa.cpp \
     src/celdagrafica.cpp \
     src/mapagrafico.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/menu.cpp \
+    src/menu.cpp
 
 HEADERS += \
     headers/celda.h \
     headers/mapa.h \
     headers/celdagrafica.h \
     headers/mapagrafico.h \
-    headers/mainwindow.h
+    headers/mainwindow.h \
+    headers/menu.h
 
 FORMS += \
     forms/mainwindow.ui
