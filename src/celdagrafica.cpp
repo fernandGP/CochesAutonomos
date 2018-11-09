@@ -1,10 +1,10 @@
 #include "../headers/celdagrafica.h"
 
-CeldaGrafica::CeldaGrafica(int valor): valor_(valor), QPushButton()
+CeldaGrafica::CeldaGrafica(int x, int y, int valor): valor_(valor), QPushButton()
 {
 
-    setFixedHeight(52);
-    setFixedWidth(52);
+    setFixedHeight(50);     //establecer diseño responsive celdas (cantidadpixel/x)(cantidadpixel/y)
+    setFixedWidth(50);
 
     switch (valor_){
     case 0: {

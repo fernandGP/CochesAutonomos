@@ -59,7 +59,7 @@ int Mapa::fHeuristica(const Celda& i, const Celda& f){
     return (int)(sqrt(pow((i.getX() - f.getX()),2) + pow((i.getY() - f.getY()), 2)));        //Distancia euclídea, trust me
 }
 
-Mapa::Mapa(int x, int y, int pObst, int nPeatones):x_(x), y_(y){
+Mapa::Mapa(int x, int y, bool autom, int pObst, int nPeatones):x_(x), y_(y){
 
     if(pObst == -1) porcentajeObstaculos_ = CONST_P_OBSTACULOS;
     else porcentajeObstaculos_ = pObst;
@@ -76,7 +76,7 @@ Mapa::Mapa(int x, int y, int pObst, int nPeatones):x_(x), y_(y){
         rejilla_.push_back(vectorY);
     }
 
-    addObstaculos(false);
+    addObstaculos(autom);
     addPeatones();
 
     setVecinos();

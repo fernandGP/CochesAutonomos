@@ -48,7 +48,7 @@ private:
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
 
 public:
-    Mapa(int x, int y, int pObst, int nPeatones_);
+    Mapa(int x, int y, bool autom, int pObst=0, int nPeatones_=0);
     ~Mapa();
 
     void visualizar();
