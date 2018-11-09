@@ -15,33 +15,29 @@ int main(int argc, char *argv[])
     cout << "2. Modo Gráfico" << endl;
     cin >> option;
 
+    if(option == 1){
 
-
-    if(option == 1){                //modo consola
         int obs, pea;
-        cout << "¿Quiere meter los obstaculos manualmente? Pulse 1, sino pulse 0 para aleatorio" << endl;
-        cin >> modo;
-        if(modo==true){             //si el modo es manual, falta que el usuario pueda clicar donde poner obstaculo
-            Mapa mapa(m,n,modo);    //mapa con dimensiones
-            vector<Celda> result = mapa.Astar(0,0, 4,4);
-            while(true){            //no funciona, no se muestra el mapa
-                mapa.visualizar();
-                sleep(200);
-            }
+        cout << "¿Cuánto porcentaje de obstáculos quiere?" << endl;
+        cin >> obs; cout << endl;
+        cout << "¿Cuánto porcentaje de peatones quiere?" << endl;
+        cin >> pea;
 
+        try {
+            Mapa mapa(m,n,obs,pea);
+            vector<Celda> result = mapa.Astar(0,0, 4,4);
+            mapa.visualizar();
+        } catch (initException &e) {
+            cout << e.what() << '\n';
+            return -1;
+        } catch (oobException &e) {
+            cout << e.what() << '\n';
+            return -2;
         }
-        else{
-            cout << "¿Cuánto porcentaje de obstáculos quiere?" << endl;
-            cin >> obs; cout << endl;
-            cout << "¿Cuánto porcentaje de peatones quiere?" << endl;
-            cin >> pea;
-            Mapa mapa2(m,n,modo,obs,pea);
-            vector<Celda> result2 = mapa2.Astar(0,0, 4,4);
-            while(true){
-                mapa2.visualizar();
-                sleep(200);
-            }
-        }
+
+        //Añadir implementacion mostrar_camino
+        //while(true){sleep(200);}
+
     }
     else if(option == 2){
         QApplication a(argc, argv);
@@ -52,4 +48,6 @@ int main(int argc, char *argv[])
 
         return a.exec();
     }
+
+    return 0;
 }

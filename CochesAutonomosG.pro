@@ -37,7 +37,8 @@ HEADERS += \
     headers/mapa.h \
     headers/celdagrafica.h \
     headers/mapagrafico.h \
-    headers/mainwindow.h
+    headers/mainwindow.h \
+    headers/pers_exceptions.hpp
 
 FORMS += \
     forms/mainwindow.ui

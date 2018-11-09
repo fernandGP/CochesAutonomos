@@ -1,13 +1,18 @@
 #include "../headers/celda.h"
 
 Celda::Celda():valor_(0), g_(INT_MAX), f_(INT_MAX), x_(0), y_(0){
-    padre_ = std::make_pair(0, 0);
+    padre_ = std::make_pair(0, 0);  //default
 }
 
-Celda::Celda(int x, int y, int valor/* = 0 */, int g, int f):
+Celda::Celda(int x, int y, int valor, int g, int f):
 valor_(valor), g_(g), f_(f), x_(x), y_(y)
 {
-    padre_ = std::make_pair(0,0);
+    if(x < 0 || y < 0) throw initException();
+
+    if(valor_ < 0 || valor_ >= 3){
+        valor_ = 0;                 //default
+    }
+    padre_ = std::make_pair(0,0);   //default
 }
 
 Celda::~Celda(){}
@@ -61,17 +66,10 @@ void Celda::visualizar(){
             break;
         }
         default: {
-            //throw a excepción personalizada
-            break;
+            throw oobException();
         }
     }
 }
-
-/*
-bool Celda::operator<(const Celda& right){
-    return h_ < right.h_;
-}
-*/
 
 void Celda::addVecino(const Celda& c){
     vecinos_.push_back(std::make_pair(c.getX(), c.getY()));

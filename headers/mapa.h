@@ -1,14 +1,14 @@
 #ifndef MAPA_H
 #define MAPA_H
 
-#define CONST_P_OBSTACULOS 30
-#define CONST_N_PEATONES 20
+const int CONST_N_PEATONES  = 5;
+const int CONST_P_OBSTACULOS = 30;
 
 #include <vector>
 #include <sstream>
 #include <fstream>
 #include "celda.h"
-//#include <set>
+#include <ctime>
 #include <cmath>
 
 using namespace std;
@@ -16,6 +16,8 @@ using namespace std;
 /**
  * Mapa: Matriz de celdas, implementada en la línea de comandos. Desde ella se
  *   gestionan las celdas y sus propiedades.
+ * Sirve de entorno de simulación del algoritmo A* de busqueda de caminos minimos
+ *   que implementamos
  */
 class Mapa{
 
@@ -40,15 +42,15 @@ private:
      */
     void addObstaculos(bool mod);
     void addPeatones();
-    int fHeuristica(const Celda&, const Celda&);
+    int fHeuristica(const Celda&, const Celda&);                //Cambiar a clase funcion heuristica
 
     void setVecinos();
     bool is_in_set(const Celda&, const std::vector<Celda>&);
-
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
 
 public:
-    Mapa(int x, int y, bool autom, int pObst=0, int nPeatones_=0);
+
+    Mapa(int x, int y, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_N_PEATONES);
     ~Mapa();
 
     void visualizar();
