@@ -5,6 +5,7 @@
 #include <climits>
 #include <utility>
 #include <vector>
+#include "pers_exceptions.hpp"
 
 /**
  * Celda: Define, en la línea de comandos, las celdas que componen
@@ -22,9 +23,13 @@ private:
     int valor_;
     int g_;                             //Coste principio-celda
     int f_;                             //Coste celda-final
-    int x_;             //La celda necesita sus coordenadas para conocer la funcion heurística
-    int y_;             //Será sobretodo necesario en la celda gráfica
+    int x_;                             //La celda necesita sus coordenadas para conocer la funcion heurística
+    int y_;
 
+    /**
+     * vecinos_: Almacena coordenadas de celdas ACCESIBLES (sin obstáculos) colindantes
+     * padre_: Coordenadas de la celda vecina con menor coste de llegada hasta el momento (camino minimo)
+     */
     std::vector<std::pair<int, int> > vecinos_;
     std::pair<int, int> padre_;
 
@@ -33,6 +38,11 @@ public:
     Celda();
     Celda(int x, int y, int valor = 0, int g = INT_MAX , int f = INT_MAX);
     ~Celda();
+
+    /**
+     *  Los siguientes metodos son getters y setters del valor interno de la celda,
+     *  de sus coordenadas x,y  y de sus valores para heurística g_ y f_
+     */
 
     int getValor();                             void setValor(int valor);
     int getX() const;
@@ -53,8 +63,11 @@ public:
      * '!': Usuario.
      */
     void visualizar();
+
+    /**
+     * addVecino(const Celda&) Añade un par x,y a su vector de vecinos
+     */
     void addVecino(const Celda&);
-    //    bool operator<(const Celda& right);
 };
 
 #endif // CELDA_H
