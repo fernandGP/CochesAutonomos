@@ -6,6 +6,7 @@
 int main(int argc, char *argv[])
 {
     int m,n,option;
+    bool modo;
     cout << "--Dimensiones mapa--" << endl;
     cout << "Introduce largo: "; cin >> m; cout << endl;
     cout << "Introduce ancho:"; cin >> n; cout << endl;
@@ -36,11 +37,12 @@ int main(int argc, char *argv[])
 
         //Añadir implementacion mostrar_camino
         //while(true){sleep(200);}
+
     }
     else if(option == 2){
         QApplication a(argc, argv);
 
-        MainWindow *w = new MainWindow(new QWidget);
+        MainWindow *w = new MainWindow(m,n,new QWidget);
 
         w -> show();
 
