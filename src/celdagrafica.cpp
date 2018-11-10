@@ -2,9 +2,13 @@
 
 CeldaGrafica::CeldaGrafica(int x, int y, int valor): valor_(valor), QPushButton()
 {
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
 
-    setFixedHeight(50);     //establecer diseño responsive celdas (cantidadpixel/x)(cantidadpixel/y)
-    setFixedWidth(50);
+    setFixedHeight(height/x);
+    setFixedWidth(width/y);
 
     switch (valor_){
     case 0: {
