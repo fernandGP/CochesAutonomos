@@ -2,19 +2,23 @@
 
 void Mapa::addObstaculos(bool mod){
 
-    if(mod){    //Modo guiado
+    if(mod){                                                            //Modo guiado
         int x, y;
         ifstream InputFile;
         InputFile.open ("coordenadas.txt", ios::in);
 
         while(!InputFile.eof()){
             InputFile >> x >> y;
-            rejilla_[x][y].setValor(1);
+            if(x < 0 || y < 0 || static_cast<unsigned int>(x) >= rejilla_.size() || static_cast<unsigned int>(y) >= rejilla_[0].size()){
+                //Out of borders control
+                throw initException();
+            }
+            rejilla_[static_cast<unsigned int>(x)][static_cast<unsigned int>(y)].setValor(1);
         }
         InputFile.close();
     }
     else{       //Asignación automática
-        srand(time(nullptr));
+        srand(static_cast<unsigned int>(time(nullptr)));
         for(unsigned int i = 0; i < rejilla_.size(); i++){
             for(unsigned int j = 0; j < rejilla_[i].size(); j++){
                 if(rand()%100 < porcentajeObstaculos_)  rejilla_[i][j].setValor(1);
@@ -25,28 +29,28 @@ void Mapa::addObstaculos(bool mod){
 
 void Mapa::addPeatones(){}
 
-void Mapa::setVecinos(){
-    for(int i = 0; i < rejilla_.size(); i++){
-        for(int j = 0; j < rejilla_[i].size(); j++){
-            if(rejilla_[i][j].getValor() != 1){
+void Mapa::setVecinos(){        //Definitivamente necesitamos que sean enteros normales, asi que... C++11 type-cast
+    for(int i = 0; static_cast<unsigned int>(i) < rejilla_.size(); i++){
+        for(int j = 0; static_cast<unsigned int>(j) < rejilla_[static_cast<unsigned int>(i)].size(); j++){
+            if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].getValor() != 1){
                 if(i-1 >= 0){
-                    if(rejilla_[i-1][j].getValor() != 1){
-                        rejilla_[i][j].addVecino(rejilla_[i-1][j]);
+                    if(rejilla_[static_cast<unsigned int>(i-1)][static_cast<unsigned int>(j)].getValor() != 1){
+                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i-1)][static_cast<unsigned int>(j)]);
                     }
                 }
-                if(i+1 < rejilla_.size()){
-                    if(rejilla_[i+1][j].getValor() != 1){
-                        rejilla_[i][j].addVecino(rejilla_[i+1][j]);
+                if(static_cast<unsigned int>(i+1) < rejilla_.size()){
+                    if(rejilla_[static_cast<unsigned int>(i+1)][static_cast<unsigned int>(j)].getValor() != 1){
+                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i+1)][static_cast<unsigned int>(j)]);
                     }
                 }
                 if(j-1 >= 0){
-                    if(rejilla_[i][j-1].getValor() != 1){
-                        rejilla_[i][j].addVecino(rejilla_[i][j-1]);
+                    if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j-1)].getValor() != 1){
+                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j-1)]);
                     }
                 }
-                if(j+1 < rejilla_[i].size()){
-                    if(rejilla_[i][j+1].getValor() != 1){
-                        rejilla_[i][j].addVecino(rejilla_[i][j+1]);
+                if(static_cast<unsigned int>(j+1) < rejilla_[static_cast<unsigned int>(i)].size()){
+                    if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j+1)].getValor() != 1){
+                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j+1)]);
                     }
                 }
             }
@@ -87,6 +91,8 @@ Mapa::Mapa(int x, int y, int pObst, int nPeatones):x_(x), y_(y){
 
 Mapa::~Mapa(){}
 
+vector<vector<Celda> >& Mapa::getsetRejilla(){ return rejilla_; }
+
 void Mapa::visualizar(){
 
     try {
@@ -115,7 +121,7 @@ void Mapa::reconstruir_camino(vector<Celda> &v, Celda actual, Celda I){
     Celda a = actual;
     v.push_back(a);
     while(a.getX() != I.getX() || a.getY() != I.getY()){           //Mientras no llegue a la celda inicial
-        a = rejilla_[a.getPadre().first][a.getPadre().second];
+        a = rejilla_[static_cast<unsigned int>(a.getPadre().first)][static_cast<unsigned int>(a.getPadre().second)];
         v.push_back(a);
     }
 }
@@ -178,4 +184,18 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
 
     return result;                                                      //Si revisa todas las celdas posibles y no ve nada,
                                                                         //el problema no tiene solución
+}
+
+void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal){
+
+    vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
+
+    for(unsigned int i = 0; i < result.size(); i++){
+        //cout << "(" << result[i].getX() << "," << result[i].getY() << ")" << endl;
+        rejilla_[result[i].getX()][result[i].getY()].setValor(2);
+    }
+
+    cout << "\n\n" << endl;
+
+    visualizar();
 }

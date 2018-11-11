@@ -1,6 +1,6 @@
 #include "../headers/celdagrafica.h"
 
-CeldaGrafica::CeldaGrafica(int valor): valor_(valor), QPushButton()
+CeldaGrafica::CeldaGrafica(int valor):  QPushButton(), valor_(valor)
 {
 
     setFixedHeight(52);

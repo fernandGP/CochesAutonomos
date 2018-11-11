@@ -47,13 +47,16 @@ private:
     void setVecinos();
     bool is_in_set(const Celda&, const std::vector<Celda>&);
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
-
+    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 public:
     Mapa(int x, int y, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_N_PEATONES);
     ~Mapa();
 
+    vector<vector<Celda> >& getsetRejilla();
+
+    void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
     void visualizar();
-    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
+
 };
 
 #endif // MAPA_H

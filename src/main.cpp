@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 
         try {
             Mapa mapa(m,n,obs,pea);
-            vector<Celda> result = mapa.Astar(0,0, 4,4);
-            mapa.visualizar();
+            mapa.caminoMinimo(0,0, 19,19);
+
         } catch (initException &e) {
             cout << e.what() << '\n';
             return -1;
@@ -34,8 +34,6 @@ int main(int argc, char *argv[])
             return -2;
         }
 
-        //Añadir implementacion mostrar_camino
-        //while(true){sleep(200);}
     }
     else if(option == 2){
         QApplication a(argc, argv);
