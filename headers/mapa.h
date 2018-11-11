@@ -49,6 +49,7 @@ private:
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
     vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 public:
+
     Mapa(int x, int y, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_N_PEATONES);
     ~Mapa();
 
