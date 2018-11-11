@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
         cin >> pea;
 
         try {
+
             Mapa mapa(m,n,obs,pea);
             mapa.caminoMinimo(0,0, 19,19);
 
