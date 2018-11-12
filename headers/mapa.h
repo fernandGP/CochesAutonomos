@@ -10,6 +10,7 @@ const int CONST_P_OBSTACULOS = 30;
 #include "celda.h"
 #include <ctime>
 #include <cmath>
+#include "f_heuristicas.h"
 
 using namespace std;
 
@@ -28,11 +29,14 @@ private:
      *   contendrán obstáculos.
      * nPeatones_: Contiene el número de peatones desplegados por el mapa.
      * x_, y_; Tamaño del mapa (anchura y altura).
+     * f_heuristica: Puntero clase padre, realiza el calculo h.
+     *      True = manhattan      False = euclidea
      */
     vector<vector<Celda> > rejilla_;
     int porcentajeObstaculos_;
     int nPeatones_;
     int x_, y_;
+    f_heuristica* heuristica_;
 
     /**
      * addObstaculos: Añade obstáculos en las celdas del mapa.
@@ -42,17 +46,14 @@ private:
      */
     void addObstaculos(bool mod);
     void addPeatones();
-    int fHeuristica(const Celda&, const Celda&);                //Cambiar a clase funcion heuristica
 
     void setVecinos();
     bool is_in_set(const Celda&, const std::vector<Celda>&);
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
     vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 public:
-    Mapa(int x, int y, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_N_PEATONES);
+    Mapa(int x, int y, bool h, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_N_PEATONES);
     ~Mapa();
-
-    vector<vector<Celda> >& getsetRejilla();
 
     void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
     void visualizar();
