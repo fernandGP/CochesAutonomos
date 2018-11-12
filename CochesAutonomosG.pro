@@ -30,7 +30,6 @@ SOURCES += \
     src/celdagrafica.cpp \
     src/mapagrafico.cpp \
     src/mainwindow.cpp \
-    src/menu.cpp \
     src/menu.cpp
 
 HEADERS += \

@@ -15,7 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     setCentralWidget(w);
-    addToolBar(menu);
+    addToolBar(Qt::BottomToolBarArea, menu);
+    menu->setMovable(false);
+    menu->addWidget(new QPushButton(QString::fromUtf8("Generar obstáculos")));
 
     //setFixedSize(600,600);
 }

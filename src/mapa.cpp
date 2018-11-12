@@ -51,9 +51,9 @@ Mapa::~Mapa(){}
 
 void Mapa::visualizar(){
 
-    for(int i = 0; i < rejilla_.size(); i++){
+    for(unsigned int i = 0; i < rejilla_.size(); i++){
         cout << "|";
-        for (int j = 0; j < rejilla_[i].size(); j++){
+        for (unsigned int j = 0; j < rejilla_[i].size(); j++){
             rejilla_[i][j].visualizar();
         }
         cout << "|" << endl;

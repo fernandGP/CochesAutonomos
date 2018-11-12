@@ -5,10 +5,10 @@ x_(x), y_(y), porcentajeObstaculos_(pObst), nPeatones_(nPeatones),
 QGridLayout()
 {
 
-
     for(int i = 0; i < 10; i++) {
         for(int j = 0; j < 10; j++) {
-            QPushButton *pb1 = new CeldaGrafica(0);
+            CeldaGrafica *pb1 = new CeldaGrafica(0);
+            connect(pb1, &QPushButton::released, pb1, &CeldaGrafica::toggleCeldaValor);
             addWidget(pb1, i, j, 1, 1);
         }
     }
@@ -31,7 +31,6 @@ void MapaGrafico::addObstaculos(bool mod){
                     QLayoutItem* lit = itemAtPosition(i, j);
                     QWidget* wid = lit-> widget();
                     CeldaGrafica* cg = dynamic_cast<CeldaGrafica*>(wid);
-
                     /* AQUI ES DONDE IRÍA LA INSERCIÓN DE IMÁGENES PARA CADA ICONO / OBSTÁCULO */
                     cg->setStyleSheet("border-image:url(../CochesAutonomos/assets/img/gato.png);");
                 }
@@ -40,5 +39,9 @@ void MapaGrafico::addObstaculos(bool mod){
 
         //Envio de señal para el cambio de evento
     }
+}
+
+void MapaGrafico::toggleButton(CeldaGrafica*& cg) {
+    cg->toggleCeldaValor();
 }
 

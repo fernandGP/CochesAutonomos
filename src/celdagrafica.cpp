@@ -26,17 +26,16 @@ CeldaGrafica::CeldaGrafica(int valor): valor_(valor), QPushButton()
     }
 }
 
-CeldaGrafica::~CeldaGrafica(){}
 
 void CeldaGrafica::setValor(int val){
     valor_ = val;
     switch (valor_){
     case 0: {
-        setText(" ");
+        setStyleSheet("");
         break;
     }
     case 1: {
-        setText("0");
+        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/gato.png);");
         break;
     }
     case 2: {
@@ -51,3 +50,11 @@ void CeldaGrafica::setValor(int val){
 }
 
 int CeldaGrafica::getValor(){ return valor_; }
+
+void CeldaGrafica::toggleCeldaValor() {
+    if (valor_ == 0 || valor_ == 1) {
+        setValor(valor_ += 1);
+    } else {
+        setValor(0);
+    }
+}
