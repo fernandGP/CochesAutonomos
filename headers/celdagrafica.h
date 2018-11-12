@@ -2,9 +2,11 @@
 #define CELDAGRAFICA_H
 
 #include <QPushButton>
+#include <QApplication>
 #include <QWidget>
 #include <QObject>
 #include <QString>
+#include "celda.h"
 
 /** CeldaGrafica: Expresión de la celda en la interfaz gráfica.
  * Hereda de la clase de QT "QPushButton".
@@ -26,7 +28,7 @@ private:
      */
     int valor_;
 public:
-    explicit CeldaGrafica(int valor = 0);
+    explicit CeldaGrafica(int x, int y, int valor = 0);
     virtual ~CeldaGrafica();
 
     void setValor(int val);
