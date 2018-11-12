@@ -39,7 +39,7 @@ void CeldaGrafica::setValor(int val){
         break;
     }
     case 2: {
-        setText("!");
+        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/mouse.gif)");
         break;
     }
     default: {

@@ -31,8 +31,9 @@ private:
      *  mod true: Se añaden los obstáculos desde un archivo que los contiene.
      *  mod false: Los obstáculos se generan aleatoriamente.
      */
-    void addObstaculos(bool mod);
+
     void addPeatones();
+    void vaciarMapa();
     CeldaGrafica* cg2;
 
 public:
@@ -40,6 +41,7 @@ public:
     virtual ~MapaGrafico();
 
     void visualizar();                              //Redundante en el modo grafico
+    void addObstaculos();
     void toggleButton(CeldaGrafica*& cg);
 
 };

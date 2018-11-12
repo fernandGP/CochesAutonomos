@@ -13,11 +13,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     w -> setLayout(mapa);
 
+    QPushButton* generarObstaculos = new QPushButton(QString::fromUtf8("Generar obstáculos"));
+    connect(generarObstaculos, &QPushButton::released, mapa, &MapaGrafico::addObstaculos);
 
     setCentralWidget(w);
     addToolBar(Qt::BottomToolBarArea, menu);
     menu->setMovable(false);
-    menu->addWidget(new QPushButton(QString::fromUtf8("Generar obstáculos")));
+    menu->addWidget(generarObstaculos);
 
     //setFixedSize(600,600);
 }
