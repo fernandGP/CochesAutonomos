@@ -24,9 +24,15 @@ int main(int argc, char *argv[])
         cin >> pea;
 
         try {
+            srand(static_cast<unsigned int>(time(nullptr)));
 
-            Mapa mapa(m,n,obs,pea);
+            Mapa mapa(m,n,false,obs,pea);
+            cout << endl << "\n\nCamino mínimo con Funcion Heuristica: Distancia Euclidea \n\n";
             mapa.caminoMinimo(0,0, 19,19);
+
+            cout << endl << "\n\nCamino mínimo con Funcion Heuristica: Distancia Manhattan \n\n";
+            Mapa mapaso(m,n,true,obs,pea);
+            mapaso.caminoMinimo(0,0,19,19);
 
         } catch (initException &e) {
             cout << e.what() << '\n';

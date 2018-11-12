@@ -18,7 +18,6 @@ void Mapa::addObstaculos(bool mod){
         InputFile.close();
     }
     else{       //Asignación automática
-        srand(static_cast<unsigned int>(time(nullptr)));
         for(unsigned int i = 0; i < rejilla_.size(); i++){
             for(unsigned int j = 0; j < rejilla_[i].size(); j++){
                 if(rand()%100 < porcentajeObstaculos_)  rejilla_[i][j].setValor(1);
@@ -58,17 +57,16 @@ void Mapa::setVecinos(){        //Definitivamente necesitamos que sean enteros n
     }
 }
 
-int Mapa::fHeuristica(const Celda& i, const Celda& f){
-    return (int)(sqrt(pow((i.getX() - f.getX()),2) + pow((i.getY() - f.getY()), 2)));        //Distancia euclídea, trust me
-}
-
-Mapa::Mapa(int x, int y, int pObst, int nPeatones):x_(x), y_(y){
+Mapa::Mapa(int x, int y, bool h, int pObst, int nPeatones):x_(x), y_(y){
 
     if(pObst < 0) porcentajeObstaculos_ = CONST_P_OBSTACULOS;
     else porcentajeObstaculos_ = pObst;
 
     if(nPeatones < 0) nPeatones_ = CONST_N_PEATONES;
     else nPeatones_ = nPeatones;
+
+    if(h){ heuristica_ = new d_manhattan(); }
+    else{  heuristica_ = new d_euclidea();  }
 
     try {
         for(int i = 0; i < x_; i++){
@@ -91,8 +89,6 @@ Mapa::Mapa(int x, int y, int pObst, int nPeatones):x_(x), y_(y){
 
 Mapa::~Mapa(){}
 
-vector<vector<Celda> >& Mapa::getsetRejilla(){ return rejilla_; }
-
 void Mapa::visualizar(){
 
     try {
@@ -110,7 +106,7 @@ void Mapa::visualizar(){
 }
 
 bool Mapa::is_in_set(const Celda& c, const std::vector<Celda>& s){
-    for(int i = 0; i < s.size(); i++)
+    for(unsigned int i = 0; i < s.size(); i++)
         if(s[i].getX()==c.getX() && s[i].getY()==c.getY())
             return true;
 
@@ -136,7 +132,7 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
     Celda& Final = rejilla_[xFinal][yFinal];
 
     Inicial.setg_(0);                                                   //Cambiamos valores heuristicos de la primera Celda
-    Inicial.setf_(fHeuristica(Inicial, Final));
+    Inicial.setf_((*heuristica_)(Inicial, Final));
 
     setAbierto.push_back(Inicial);                                      //Setup completada
 
@@ -178,7 +174,7 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
             //Este camino es el mejor! Guárdalo
             rejilla_[vecino.getX()][vecino.getY()].setPadre(actual);
             rejilla_[vecino.getX()][vecino.getY()].setg_(tent_g);
-            rejilla_[vecino.getX()][vecino.getY()].setf_(tent_g + fHeuristica(vecino, Final));
+            rejilla_[vecino.getX()][vecino.getY()].setf_(tent_g + (*heuristica_)(vecino, Final));
         }
     }
 
@@ -191,8 +187,7 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
     vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
 
     for(unsigned int i = 0; i < result.size(); i++){
-        //cout << "(" << result[i].getX() << "," << result[i].getY() << ")" << endl;
-        rejilla_[result[i].getX()][result[i].getY()].setValor(2);
+        rejilla_[result[i].getX()][result[i].getY()].setValor(3);
     }
 
     cout << "\n\n" << endl;

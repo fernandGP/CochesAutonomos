@@ -9,7 +9,7 @@ valor_(valor), g_(g), f_(f), x_(x), y_(y)
 {
     if(x < 0 || y < 0) throw initException();
 
-    if(valor_ < 0 || valor_ >= 3){
+    if(valor_ < 0 || valor_ > 3){
         valor_ = 0;                 //default
     }
     padre_ = std::make_pair(0,0);   //default
@@ -64,6 +64,10 @@ void Celda::visualizar(){
         case 2: {
             std::cout << " ! ";
             break;
+        }
+        case 3: {
+            std::cout << " X ";
+        break;
         }
         default: {
             throw oobException();

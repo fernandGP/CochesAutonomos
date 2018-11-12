@@ -19,6 +19,7 @@ private:
      * case 0: Vacío.
      * case 1: Obstáculo.
      * case 2: Usuario.
+     * case 3: Camino de coche
      */
     int valor_;
     int g_;                             //Coste principio-celda
