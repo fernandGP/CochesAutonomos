@@ -1,9 +1,6 @@
 #ifndef MAPAGRAFICO_H
 #define MAPAGRAFICO_H
 
-const int CONST_P_PEATONES  = 5;
-const int CONST_P_OBSTACULOS = 30;
-
 #include <QGridLayout>
 #include <fstream>
 #include "celdagrafica.h"
