@@ -26,7 +26,16 @@ void Mapa::addObstaculos(bool mod){
     }
 }
 
-void Mapa::addPeatones(){}
+void Mapa::addPeatones(){
+       //Asignación automática
+    for(unsigned int i = 0; i < rejilla_.size(); i++){
+        for(unsigned int j = 0; j < rejilla_[i].size(); j++){
+            if((rand()%100 < nPeatones_) && (rejilla_[i][j].getValor() != 1))
+                rejilla_[i][j].setValor(2);
+        }
+    }
+
+}
 
 void Mapa::setVecinos(){        //Definitivamente necesitamos que sean enteros normales, asi que... C++11 type-cast
     for(int i = 0; static_cast<unsigned int>(i) < rejilla_.size(); i++){
@@ -62,7 +71,7 @@ Mapa::Mapa(int x, int y, bool h, int pObst, int nPeatones):x_(x), y_(y){
     if(pObst < 0) porcentajeObstaculos_ = CONST_P_OBSTACULOS;
     else porcentajeObstaculos_ = pObst;
 
-    if(nPeatones < 0) nPeatones_ = CONST_N_PEATONES;
+    if(nPeatones < 0) nPeatones_ = CONST_P_PEATONES;
     else nPeatones_ = nPeatones;
 
     if(h){ heuristica_ = new d_manhattan(); }
@@ -87,7 +96,9 @@ Mapa::Mapa(int x, int y, bool h, int pObst, int nPeatones):x_(x), y_(y){
     setVecinos();
 }
 
-Mapa::~Mapa(){}
+Mapa::~Mapa(){
+    delete heuristica_;
+}
 
 void Mapa::visualizar(){
 

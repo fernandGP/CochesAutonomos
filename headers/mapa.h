@@ -1,7 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 
-const int CONST_N_PEATONES  = 5;
+const int CONST_P_PEATONES  = 5;
 const int CONST_P_OBSTACULOS = 30;
 
 #include <vector>
@@ -52,7 +52,7 @@ private:
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
     vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 public:
-    Mapa(int x, int y, bool h, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_N_PEATONES);
+    Mapa(int x, int y, bool h, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_P_PEATONES);
     ~Mapa();
 
     void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
