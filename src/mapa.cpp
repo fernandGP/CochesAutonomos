@@ -5,7 +5,7 @@ void Mapa::addObstaculos(bool mod){
     if(mod){                                                            //Modo guiado
         int x, y;
         ifstream InputFile;
-        InputFile.open ("coordenadas.txt", ios::in);
+        InputFile.open ("../CochesAutonomos/assets/coordenadas.txt", ios::in);
 
         while(!InputFile.eof()){
             InputFile >> x >> y;
