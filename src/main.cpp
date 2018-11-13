@@ -6,7 +6,6 @@
 int main(int argc, char *argv[])
 {
     int m,n,option;
-    bool modo;
     cout << "--Dimensiones mapa--" << endl;
     cout << "Introduce largo: "; cin >> m; cout << endl;
     cout << "Introduce ancho:"; cin >> n; cout << endl;
@@ -39,6 +38,11 @@ int main(int argc, char *argv[])
             cin >> yFinal;
 
             cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Euclidea \n\n";
+            mapa.caminoMinimo(xInicio, yInicio, xFinal, yFinal);
+
+            mapa.cambiarHeuristica(true);
+
+            cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Manhattan \n\n";
             mapa.caminoMinimo(xInicio, yInicio, xFinal, yFinal);
 
         } catch (initException &e) {
