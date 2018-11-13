@@ -45,6 +45,7 @@ void Mapa::resetCamino(){
 }
 
 void Mapa::setVecinosAt(int i, int j){
+    rejilla_[i][j].resetVecinos();
     if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].getValor() != 1){
         if(i-1 >= 0){
             if(rejilla_[static_cast<unsigned int>(i-1)][static_cast<unsigned int>(j)].getValor() != 1){
@@ -214,7 +215,18 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
     }
     if(rejilla_[xFinal][yFinal].getValor() == 1){
        rejilla_[xFinal][yFinal].setValor(0);
-
+       if(static_cast<int>(xFinal) - 1 >= 0){
+           setVecinosAt(xFinal - 1, yFinal);
+       }
+       if(xFinal + 1 < rejilla_.size()){
+           setVecinosAt(xFinal + 1, yFinal);
+       }
+       if(static_cast<int>(yFinal) - 1 >= 0){
+           setVecinosAt(xFinal, yFinal - 1);
+       }
+       if(yFinal + 1 < rejilla_[0].size()){
+           setVecinosAt(xFinal, yFinal + 1);
+       }
     }
 
     vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);

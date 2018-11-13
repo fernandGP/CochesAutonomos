@@ -48,7 +48,11 @@ void Celda::setPadre(const Celda& c){
 unsigned int Celda::sizeVecinos(){ return vecinos_.size(); }
 
 std::pair<int, int> Celda::getVecino(int i){
-    return vecinos_[i];
+    return vecinos_[static_cast<unsigned int>(i)];
+}
+
+void Celda::resetVecinos(){
+    vecinos_.clear();
 }
 
 void Celda::visualizar(){
