@@ -20,11 +20,10 @@ private:
      *   contendrán obstáculos.
      * nPeatones_: Contiene el número de peatones desplegados por el mapa.
      * x_, y_; Tamaño del mapa (anchura y altura).
-     */
+     */ 
+    int x_, y_;
     int porcentajeObstaculos_;
     int nPeatones_;
-    int x_, y_;
-
     /**
      * addObstaculos: Añade obstáculos en las celdas del mapa.
      * mod: Booleano que permite alternar la entrada de obstáculos en el mapa:

@@ -1,15 +1,19 @@
 #include "../headers/mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(int x, int y, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
     QWidget* w = new QWidget;
+<<<<<<< HEAD
     mapa = new MapaGrafico;
     menu = new Menu;
+=======
+    mapa = new MapaGrafico(x,y);
+>>>>>>> 0d3386ce537bd015500db469223ec49177376511
 
     w -> setLayout(mapa);
 

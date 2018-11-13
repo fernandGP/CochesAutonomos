@@ -1,19 +1,24 @@
 #ifndef MAPA_H
 #define MAPA_H
 
-#define CONST_P_OBSTACULOS 30
-#define CONST_N_PEATONES 20
+const int CONST_P_PEATONES  = 5;
+const int CONST_P_OBSTACULOS = 30;
 
 #include <vector>
 #include <sstream>
 #include <fstream>
 #include "celda.h"
+#include <ctime>
+#include <cmath>
+#include "f_heuristicas.h"
 
 using namespace std;
 
 /**
  * Mapa: Matriz de celdas, implementada en la línea de comandos. Desde ella se
  *   gestionan las celdas y sus propiedades.
+ * Sirve de entorno de simulación del algoritmo A* de busqueda de caminos minimos
+ *   que implementamos
  */
 class Mapa{
 
@@ -24,11 +29,14 @@ private:
      *   contendrán obstáculos.
      * nPeatones_: Contiene el número de peatones desplegados por el mapa.
      * x_, y_; Tamaño del mapa (anchura y altura).
+     * f_heuristica: Puntero clase padre, realiza el calculo h.
+     *      True = manhattan      False = euclidea
      */
     vector<vector<Celda> > rejilla_;
     int porcentajeObstaculos_;
     int nPeatones_;
     int x_, y_;
+    f_heuristica* heuristica_;
 
     /**
      * addObstaculos: Añade obstáculos en las celdas del mapa.
@@ -39,11 +47,18 @@ private:
     void addObstaculos(bool mod);
     void addPeatones();
 
-public:
-    Mapa(int x, int y, int pObst, int nPeatones_);
+    void setVecinos();
+    bool is_in_set(const Celda&, const std::vector<Celda>&);
+    void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
+    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
+
+    Mapa(int x, int y, bool h, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_P_PEATONES);
     ~Mapa();
 
+    void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
     void visualizar();
+
+    void cambiarHeuristica(bool);
 };
 
 #endif // MAPA_H
