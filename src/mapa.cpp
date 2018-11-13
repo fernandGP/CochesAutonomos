@@ -37,31 +37,35 @@ void Mapa::addPeatones(){
 
 }
 
+void Mapa::setVecinosAt(int i, int j){
+    if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].getValor() != 1){
+        if(i-1 >= 0){
+            if(rejilla_[static_cast<unsigned int>(i-1)][static_cast<unsigned int>(j)].getValor() != 1){
+                rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i-1)][static_cast<unsigned int>(j)]);
+            }
+        }
+        if(static_cast<unsigned int>(i+1) < rejilla_.size()){
+            if(rejilla_[static_cast<unsigned int>(i+1)][static_cast<unsigned int>(j)].getValor() != 1){
+                rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i+1)][static_cast<unsigned int>(j)]);
+            }
+        }
+        if(j-1 >= 0){
+            if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j-1)].getValor() != 1){
+                rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j-1)]);
+            }
+        }
+        if(static_cast<unsigned int>(j+1) < rejilla_[static_cast<unsigned int>(i)].size()){
+            if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j+1)].getValor() != 1){
+                rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j+1)]);
+            }
+        }
+    }
+}
+
 void Mapa::setVecinos(){        //Definitivamente necesitamos que sean enteros normales, asi que... C++11 type-cast
     for(int i = 0; static_cast<unsigned int>(i) < rejilla_.size(); i++){
         for(int j = 0; static_cast<unsigned int>(j) < rejilla_[static_cast<unsigned int>(i)].size(); j++){
-            if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].getValor() != 1){
-                if(i-1 >= 0){
-                    if(rejilla_[static_cast<unsigned int>(i-1)][static_cast<unsigned int>(j)].getValor() != 1){
-                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i-1)][static_cast<unsigned int>(j)]);
-                    }
-                }
-                if(static_cast<unsigned int>(i+1) < rejilla_.size()){
-                    if(rejilla_[static_cast<unsigned int>(i+1)][static_cast<unsigned int>(j)].getValor() != 1){
-                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i+1)][static_cast<unsigned int>(j)]);
-                    }
-                }
-                if(j-1 >= 0){
-                    if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j-1)].getValor() != 1){
-                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j-1)]);
-                    }
-                }
-                if(static_cast<unsigned int>(j+1) < rejilla_[static_cast<unsigned int>(i)].size()){
-                    if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j+1)].getValor() != 1){
-                        rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].addVecino(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j+1)]);
-                    }
-                }
-            }
+            setVecinosAt(i, j);
         }
     }
 }
@@ -197,26 +201,7 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
 
     if(rejilla_[xInicio][yInicio].getValor() == 1){
         rejilla_[xInicio][yInicio].setValor(0);
-        if(static_cast<int>(xInicio)-1 >= 0){
-            if(rejilla_[xInicio-1][yInicio].getValor() != 1){
-                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio-1][yInicio]);
-            }
-        }
-        if(xInicio+1 < rejilla_.size()){
-            if(rejilla_[xInicio+1][yInicio].getValor() != 1){
-                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio+1][yInicio]);
-            }
-        }
-        if(static_cast<int>(yInicio)-1 >= 0){
-            if(rejilla_[xInicio][yInicio-1].getValor() != 1){
-                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio][yInicio-1]);
-            }
-        }
-        if(yInicio+1 < rejilla_[xInicio].size()){
-            if(rejilla_[xInicio][yInicio+1].getValor() != 1){
-                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio][yInicio+1]);
-            }
-        }
+        setVecinosAt(static_cast<int>(xInicio), static_cast<int>(yInicio));
     }
     if(rejilla_[xFinal][yFinal].getValor() == 1){
        rejilla_[xFinal][yFinal].setValor(0);
