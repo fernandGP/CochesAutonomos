@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     else if(option == 2){
         QApplication a(argc, argv);
 
-        MainWindow *w = new MainWindow(m,n,new QWidget);
+        MainWindow *w = new MainWindow(m,n,false, 10, 10, new QWidget);
 
         w -> show();
 

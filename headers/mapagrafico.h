@@ -1,9 +1,18 @@
 #ifndef MAPAGRAFICO_H
 #define MAPAGRAFICO_H
 
+const int CONST_P_PEATONES  = 5;
+const int CONST_P_OBSTACULOS = 30;
+
 #include <QGridLayout>
 #include <fstream>
 #include "celdagrafica.h"
+#include <vector>
+#include <sstream>
+#include <fstream>
+#include <ctime>
+#include <cmath>
+#include "f_heuristicas.h"
 
 using namespace std;
 
@@ -24,6 +33,7 @@ private:
     int x_, y_;
     int porcentajeObstaculos_;
     int nPeatones_;
+    f_heuristica* heuristica_;
     /**
      * addObstaculos: Añade obstáculos en las celdas del mapa.
      * mod: Booleano que permite alternar la entrada de obstáculos en el mapa:
@@ -33,15 +43,21 @@ private:
 
     void addPeatones();
     void vaciarMapa();
-    CeldaGrafica* cg2;
+
+    void setVecinos();
+    bool is_in_set(const Celda&, const std::vector<Celda>&);
+    void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
+    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 
 public:
-    explicit MapaGrafico(int x = 10, int y = 10, int pObst = 20, int nPeatones_ = 10, bool opt = 0);
+    explicit MapaGrafico(int x = 10, int y = 10, bool h = false, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_P_PEATONES, bool opt = 0);
     virtual ~MapaGrafico();
 
+    void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
     void visualizar();                              //Redundante en el modo grafico
     void addObstaculos();
     void toggleButton(CeldaGrafica*& cg);
+    void startCaminoMinimo();
 
 };
 

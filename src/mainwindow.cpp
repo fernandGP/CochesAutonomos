@@ -1,7 +1,7 @@
 #include "../headers/mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(int x, int y, QWidget *parent) :
+MainWindow::MainWindow(int x, int y, bool h, int obs, int pea, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
@@ -11,15 +11,23 @@ MainWindow::MainWindow(int x, int y, QWidget *parent) :
     mapa = new MapaGrafico(x, y);
     menu = new Menu;
 
+    setWindowTitle("Ratón");
+
     w -> setLayout(mapa);
 
     QPushButton* generarObstaculos = new QPushButton(QString::fromUtf8("Generar obstáculos"));
     connect(generarObstaculos, &QPushButton::released, mapa, &MapaGrafico::addObstaculos);
 
+    QPushButton* calcularTrayectoria = new QPushButton(QString::fromUtf8("Calcular trayectoria"));
+    connect(calcularTrayectoria, &QPushButton::released, mapa, &MapaGrafico::startCaminoMinimo);
+
     setCentralWidget(w);
     addToolBar(Qt::BottomToolBarArea, menu);
     menu->setMovable(false);
     menu->addWidget(generarObstaculos);
+    menu->addWidget(calcularTrayectoria);
+
+    void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 
     //setFixedSize(600,600);
 }

@@ -27,6 +27,8 @@ private:
      * case 2: Usuario ('!').
      */
     int valor_;
+    int x_;
+    int y_;
 public:
     explicit CeldaGrafica(int x, int y, int valor = 0);
 

@@ -3,6 +3,7 @@
 
 CeldaGrafica::CeldaGrafica(int x, int y, int valor):  QPushButton(), valor_(valor)
 {
+
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = geometry();
     int height = screenGeometry.height();
@@ -36,19 +37,33 @@ void CeldaGrafica::setValor(int val){
     valor_ = val;
     switch (valor_){
     case 0: {
+        // Vacío
         setStyleSheet("");
         break;
     }
     case 1: {
+        // Obstáculo
         setStyleSheet("border-image:url(../CochesAutonomos/assets/img/gato.png);");
         break;
     }
     case 2: {
-        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/mouse.gif)");
+        // Peatón
+        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/queso.png)");
         break;
     }
     case 3: {
-        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/queso.png)");
+        // Camino
+        setStyleSheet("background-color: rgb(255,255,0);");
+        break;
+    }
+    case 4: {
+        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/mouse.gif)");
+        break;
+    }
+    case 5: {
+
+        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/puerta.png)");
+        break;
     }
     default: {
         //throw a excepción personalizada
@@ -62,8 +77,12 @@ void CeldaGrafica::setValor(int val){
 int CeldaGrafica::getValor(){ return valor_; }
 
 void CeldaGrafica::toggleCeldaValor() {
-    if (valor_ == 0 || valor_ == 1 || valor_ == 2) {
-        setValor(valor_ += 1);
+    if (valor_ != 5) {
+        if (valor_ == 2) {
+            setValor(4);
+        } else {
+            setValor(valor_ += 1);
+        }
     } else {
         setValor(0);
     }

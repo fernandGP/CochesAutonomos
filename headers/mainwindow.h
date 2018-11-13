@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(int x, int y, QWidget *parent = 0);
+    explicit MainWindow(int x, int y, bool h, int obs, int pea, QWidget *parent);
     ~MainWindow();
 
 private:
