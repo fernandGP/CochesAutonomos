@@ -29,10 +29,11 @@ private:
     int valor_;
 public:
     explicit CeldaGrafica(int x, int y, int valor = 0);
-    virtual ~CeldaGrafica();
 
     void setValor(int val);
     int getValor();
+
+    void toggleCeldaValor();
 };
 
 #endif // CELDAGRAFICA_H

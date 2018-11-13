@@ -6,12 +6,13 @@ QGridLayout(), x_(x), y_(y), porcentajeObstaculos_(pObst), nPeatones_(nPeatones)
 
     for(int i = 0; i < x; i++) {
         for(int j = 0; j < y; j++) {
-            QPushButton *pb1 = new CeldaGrafica(x,y,0);
+            CeldaGrafica *pb1 = new CeldaGrafica(x, y, 0);
+            connect(pb1, &QPushButton::released, pb1, &CeldaGrafica::toggleCeldaValor);
             addWidget(pb1, i, j, 1, 1);
         }
     }
 
-    addObstaculos(opt);               //De momento directamente aleatorio. Pruena
+    addObstaculos();
     //addPeatones();
     setHorizontalSpacing(0);
     setVerticalSpacing(0);
@@ -19,25 +20,40 @@ QGridLayout(), x_(x), y_(y), porcentajeObstaculos_(pObst), nPeatones_(nPeatones)
 
 MapaGrafico::~MapaGrafico(){}
 
-void MapaGrafico::addObstaculos(bool mod){
-    if(mod){    //Modo guiado
-    }
-    else{       //Asignación automática
-        for(int i = 0; i < x_; i++) {
-            for(int j = 0; j < y_; j++) {
-                //srand(time(NULL));
-                if(rand()%100 < porcentajeObstaculos_){     //sigue sin ser aleatorio
-                    QLayoutItem* lit = itemAtPosition(i, j);
-                    QWidget* wid = lit-> widget();
-                    CeldaGrafica* cg = dynamic_cast<CeldaGrafica*>(wid);
+void MapaGrafico::addObstaculos(){
+  //Asignación automática
+    vaciarMapa();
 
-                    /* AQUI ES DONDE IRÍA LA INSERCIÓN DE IMÁGENES PARA CADA ICONO / OBSTÁCULO */
-                    cg->setStyleSheet("border-image:url(../CochesAutonomos/assets/img/gato.png);");
-                }
+    for(int i = 0; i < x_; i++) {
+        for(int j = 0; j < y_; j++) {
+            if(rand()%100 < porcentajeObstaculos_){
+                QLayoutItem* lit = itemAtPosition(i, j);
+                QWidget* wid = lit-> widget();
+                CeldaGrafica* cg = dynamic_cast<CeldaGrafica*>(wid);
+                /* AQUI ES DONDE IRÍA LA INSERCIÓN DE IMÁGENES PARA CADA ICONO / OBSTÁCULO */
+                cg->setValor(1);
             }
         }
-
-        //Envio de señal para el cambio de evento
     }
+        //Envio de señal para el cambio de evento
+
 }
 
+void MapaGrafico::vaciarMapa() {
+
+    for(int i = 0; i < x_; i++) {
+        for(int j = 0; j < y_; j++) {
+
+                QLayoutItem* lit = itemAtPosition(i, j);
+                QWidget* wid = lit-> widget();
+                CeldaGrafica* cg = dynamic_cast<CeldaGrafica*>(wid);
+
+                cg->setValor(0);
+        }
+    }
+
+}
+
+void MapaGrafico::toggleButton(CeldaGrafica*& cg) {
+    cg->toggleCeldaValor();
+}

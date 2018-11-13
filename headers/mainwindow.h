@@ -3,7 +3,9 @@
 
 #include <QtGui>
 #include <QMainWindow>
-#include "../headers/mapagrafico.h"
+#include <QToolBar>
+#include "mapagrafico.h"
+#include "menu.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +22,7 @@ public:
 private:
     Ui::MainWindow *ui;
     MapaGrafico* mapa;
+    Menu* menu;
 };
 
 #endif // MAINWINDOW_H

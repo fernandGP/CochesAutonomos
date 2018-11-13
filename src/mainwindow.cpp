@@ -8,11 +8,18 @@ MainWindow::MainWindow(int x, int y, QWidget *parent) :
     ui->setupUi(this);
 
     QWidget* w = new QWidget;
-    mapa = new MapaGrafico(x,y);
+    mapa = new MapaGrafico(x, y);
+    menu = new Menu;
 
     w -> setLayout(mapa);
 
+    QPushButton* generarObstaculos = new QPushButton(QString::fromUtf8("Generar obstáculos"));
+    connect(generarObstaculos, &QPushButton::released, mapa, &MapaGrafico::addObstaculos);
+
     setCentralWidget(w);
+    addToolBar(Qt::BottomToolBarArea, menu);
+    menu->setMovable(false);
+    menu->addWidget(generarObstaculos);
 
     //setFixedSize(600,600);
 }
@@ -21,5 +28,3 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-

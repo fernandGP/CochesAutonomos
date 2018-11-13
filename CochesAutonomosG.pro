@@ -31,7 +31,8 @@ SOURCES += \
     src/celdagrafica.cpp \
     src/mapagrafico.cpp \
     src/mainwindow.cpp \
-    src/f_heuristicas.cpp
+    src/f_heuristicas.cpp \
+    src/menu.cpp
 
 HEADERS += \
     headers/celda.h \
@@ -40,7 +41,8 @@ HEADERS += \
     headers/mapagrafico.h \
     headers/mainwindow.h \
     headers/pers_exceptions.hpp \
-    headers/f_heuristicas.h
+    headers/f_heuristicas.h \
+    headers/menu.h
 
 FORMS += \
     forms/mainwindow.ui
