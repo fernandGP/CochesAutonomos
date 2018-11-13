@@ -58,6 +58,7 @@ public:
     void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
     void visualizar();
 
+    void cambiarHeuristica(bool);
 };
 
 #endif // MAPA_H

@@ -195,6 +195,57 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
 
 void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal){
 
+    if(rejilla_[xInicio][yInicio].getValor() == 1){
+        rejilla_[xInicio][yInicio].setValor(0);
+        if(static_cast<int>(xInicio)-1 >= 0){
+            if(rejilla_[xInicio-1][yInicio].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio-1][yInicio]);
+            }
+        }
+        if(xInicio+1 < rejilla_.size()){
+            if(rejilla_[xInicio+1][yInicio].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio+1][yInicio]);
+            }
+        }
+        if(static_cast<int>(yInicio)-1 >= 0){
+            if(rejilla_[xInicio][yInicio-1].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio][yInicio-1]);
+            }
+        }
+        if(yInicio+1 < rejilla_[xInicio].size()){
+            if(rejilla_[xInicio][yInicio+1].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio][yInicio+1]);
+            }
+        }
+    }
+    if(rejilla_[xFinal][yFinal].getValor() == 1){
+       rejilla_[xFinal][yFinal].setValor(0);
+       if(rejilla_[xFinal][yFinal].getValor() == 1){
+           rejilla_[xFinal][yFinal].setValor(0);
+           if(static_cast<int>(xFinal)-1 >= 0){
+               if(rejilla_[xFinal-1][yFinal].getValor() != 1){
+                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal-1][yFinal]);
+               }
+           }
+           if(xFinal+1 < rejilla_.size()){
+               if(rejilla_[xFinal+1][yFinal].getValor() != 1){
+                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal+1][yFinal]);
+               }
+           }
+           if(static_cast<int>(yFinal)-1 >= 0){
+               if(rejilla_[xFinal][yFinal-1].getValor() != 1){
+                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal][yFinal-1]);
+               }
+           }
+           if(yFinal+1 < rejilla_[xFinal].size()){
+               if(rejilla_[xFinal][yFinal+1].getValor() != 1){
+                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal][yFinal+1]);
+               }
+           }
+       }
+
+    }
+
     vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
 
     for(unsigned int i = 0; i < result.size(); i++){
@@ -204,4 +255,16 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
     cout << "\n\n" << endl;
 
     visualizar();
+}
+
+void Mapa::cambiarHeuristica(bool opt){
+    delete heuristica_;
+    if(opt){
+        //Manhattan
+        heuristica_ = new d_manhattan();
+    }
+    else{
+        //Euclidea
+        heuristica_ = new d_euclidea();
+    }
 }
