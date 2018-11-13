@@ -220,30 +220,7 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
     }
     if(rejilla_[xFinal][yFinal].getValor() == 1){
        rejilla_[xFinal][yFinal].setValor(0);
-       if(rejilla_[xFinal][yFinal].getValor() == 1){
-           rejilla_[xFinal][yFinal].setValor(0);
-           if(static_cast<int>(xFinal)-1 >= 0){
-               if(rejilla_[xFinal-1][yFinal].getValor() != 1){
-                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal-1][yFinal]);
-               }
-           }
-           if(xFinal+1 < rejilla_.size()){
-               if(rejilla_[xFinal+1][yFinal].getValor() != 1){
-                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal+1][yFinal]);
-               }
-           }
-           if(static_cast<int>(yFinal)-1 >= 0){
-               if(rejilla_[xFinal][yFinal-1].getValor() != 1){
-                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal][yFinal-1]);
-               }
-           }
-           if(yFinal+1 < rejilla_[xFinal].size()){
-               if(rejilla_[xFinal][yFinal+1].getValor() != 1){
-                   rejilla_[xFinal][yFinal].addVecino(rejilla_[xFinal][yFinal+1]);
-               }
-           }
-       }
-
+       //
     }
 
     vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
