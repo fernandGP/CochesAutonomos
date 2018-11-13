@@ -1,10 +1,15 @@
 #include "../headers/celdagrafica.h"
 
+
 CeldaGrafica::CeldaGrafica(int valor):  QPushButton(), valor_(valor)
 {
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
 
-    setFixedHeight(52);
-    setFixedWidth(52);
+    setFixedHeight(height/x);
+    setFixedWidth(width/y);
 
     switch (valor_){
     case 0: {

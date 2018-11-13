@@ -4,9 +4,9 @@ MapaGrafico::MapaGrafico(int x, int y, int pObst, int nPeatones, bool opt):
 QGridLayout(), x_(x), y_(y), porcentajeObstaculos_(pObst), nPeatones_(nPeatones){
 
 
-    for(int i = 0; i < 10; i++) {
-        for(int j = 0; j < 10; j++) {
-            QPushButton *pb1 = new CeldaGrafica(0);
+    for(int i = 0; i < x; i++) {
+        for(int j = 0; j < y; j++) {
+            QPushButton *pb1 = new CeldaGrafica(x,y,0);
             addWidget(pb1, i, j, 1, 1);
         }
     }
@@ -23,9 +23,10 @@ void MapaGrafico::addObstaculos(bool mod){
     if(mod){    //Modo guiado
     }
     else{       //Asignación automática
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 10; j++) {
-                if(rand()%100 < porcentajeObstaculos_){
+        for(int i = 0; i < x_; i++) {
+            for(int j = 0; j < y_; j++) {
+                //srand(time(NULL));
+                if(rand()%100 < porcentajeObstaculos_){     //sigue sin ser aleatorio
                     QLayoutItem* lit = itemAtPosition(i, j);
                     QWidget* wid = lit-> widget();
                     CeldaGrafica* cg = dynamic_cast<CeldaGrafica*>(wid);
