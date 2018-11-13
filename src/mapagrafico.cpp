@@ -32,7 +32,7 @@ void MapaGrafico::addObstaculos(){
                 QWidget* wid = lit-> widget();
                 CeldaGrafica* cg = dynamic_cast<CeldaGrafica*>(wid);
                 /* AQUI ES DONDE IRÍA LA INSERCIÓN DE IMÁGENES PARA CADA ICONO / OBSTÁCULO */
-                cg->setStyleSheet("border-image:url(../CochesAutonomos/assets/img/gato.png);");
+                cg->setValor(1);
             }
         }
     }
