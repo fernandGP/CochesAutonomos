@@ -57,6 +57,7 @@ public:
 
     unsigned int sizeVecinos();
     std::pair<int, int> getVecino(int i);
+    void resetVecinos();
 
     /** visualizar(): Muestra el contenido por terminal.
      * ' ': Vacío.
