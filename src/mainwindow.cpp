@@ -8,12 +8,8 @@ MainWindow::MainWindow(int x, int y, QWidget *parent) :
     ui->setupUi(this);
 
     QWidget* w = new QWidget;
-<<<<<<< HEAD
-    mapa = new MapaGrafico;
+    mapa = new MapaGrafico(x, y);
     menu = new Menu;
-=======
-    mapa = new MapaGrafico(x,y);
->>>>>>> 0d3386ce537bd015500db469223ec49177376511
 
     w -> setLayout(mapa);
 
@@ -32,5 +28,3 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-

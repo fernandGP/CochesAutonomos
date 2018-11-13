@@ -51,7 +51,7 @@ private:
     bool is_in_set(const Celda&, const std::vector<Celda>&);
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
     vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
-
+public:
     Mapa(int x, int y, bool h, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_P_PEATONES);
     ~Mapa();
 

@@ -1,7 +1,7 @@
 #include "../headers/celdagrafica.h"
 
 
-CeldaGrafica::CeldaGrafica(int valor):  QPushButton(), valor_(valor)
+CeldaGrafica::CeldaGrafica(int x, int y, int valor):  QPushButton(), valor_(valor)
 {
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = geometry();

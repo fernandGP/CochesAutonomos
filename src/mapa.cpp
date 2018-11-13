@@ -102,12 +102,6 @@ Mapa::~Mapa(){
 
 void Mapa::visualizar(){
 
-<<<<<<< HEAD
-    for(unsigned int i = 0; i < rejilla_.size(); i++){
-        cout << "|";
-        for (unsigned int j = 0; j < rejilla_[i].size(); j++){
-            rejilla_[i][j].visualizar();
-=======
     try {
         for(unsigned int i = 0; i < rejilla_.size(); i++){
             cout << "|";
@@ -207,7 +201,6 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
             if(rejilla_[xInicio-1][yInicio].getValor() != 1){
                 rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio-1][yInicio]);
             }
->>>>>>> 0d3386ce537bd015500db469223ec49177376511
         }
         if(xInicio+1 < rejilla_.size()){
             if(rejilla_[xInicio+1][yInicio].getValor() != 1){
