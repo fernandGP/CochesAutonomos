@@ -1,5 +1,7 @@
 #include "../headers/mapa.h"
 
+int Mapa::contador = 0;
+
 void Mapa::addObstaculos(bool mod){
 
     if(mod){                                                            //Modo guiado
@@ -145,11 +147,15 @@ void Mapa::reconstruir_camino(vector<Celda> &v, Celda actual, Celda I){
     }
 }
 
-vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal){
+vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal, double& time){
 
     vector<Celda> result;                                               // Almacena el camino optimo
     vector<Celda> setAbierto;
     vector<Celda> setCerrado;
+
+    unsigned t0, t1;
+
+    t0 = clock();
 
     Celda& Inicial = rejilla_[xInicio][yInicio];
     Celda& Final = rejilla_[xFinal][yFinal];
@@ -158,6 +164,7 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
     Inicial.setf_((*heuristica_)(Inicial, Final));
 
     setAbierto.push_back(Inicial);                                      //Setup completada
+    contador++;
 
     while(!setAbierto.empty()){
         unsigned int winner = 0;
@@ -170,7 +177,8 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
         Celda actual = rejilla_[setAbierto[winner].getX()][setAbierto[winner].getY()];
 
         if((actual.getX() == xFinal) && (yFinal == actual.getY())){     //Es la misma celda -> Hemos llegado al final con camino óptimo
-
+            t1 = clock();
+            time = (double(t1-t0)/CLOCKS_PER_SEC);
             reconstruir_camino(result, actual, Inicial);
             return result;
         }
@@ -190,6 +198,7 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
 
             if(!is_in_set(vecino, setAbierto)){
                 setAbierto.push_back(vecino);
+                contador++;
             }
             else if(tent_g >= vecino.getg_())
                 continue;
@@ -201,12 +210,15 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
         }
     }
 
-    return result;                                                      //Si revisa todas las celdas posibles y no ve nada,
-                                                                        //el problema no tiene solución
+    t1 = clock();
+    time = (double(t1-t0)/CLOCKS_PER_SEC);
+
+    return result;
 }
 
-void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal){
+void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal, int& pasajeros){
 
+    double time;
     resetCamino();
 
     if(rejilla_[xInicio][yInicio].getValor() == 1){
@@ -229,9 +241,21 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
        }
     }
 
-    vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
+    vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal,time);
 
-    cout << "Tamano resultado: " << result.size() << endl;
+    cout << "Tamano resultado: " << result.size() << endl
+         << "Tiempo de ejecucion: " << time;
+
+    for(unsigned int i = 0; i < result.size(); i++){
+        if(rejilla_[result[i].getX()][result[i].getY()].getValor() == 2) pasajeros++;
+        for(int j = 0; j < result[i].sizeVecinos(); j++){
+            if(rejilla_[result[i].getVecino(j).first][result[i].getVecino(j).second].getValor() == 3){
+                pasajeros++;
+                if(pasajeros >= CAP_MAX_COCHE) break;
+            }
+            if(pasajeros >= CAP_MAX_COCHE) break;
+        }
+    }
 
     for(unsigned int i = 0; i < result.size(); i++){
         rejilla_[result[i].getX()][result[i].getY()].setValor(3);
@@ -253,3 +277,4 @@ void Mapa::cambiarHeuristica(bool opt){
         heuristica_ = new d_euclidea();
     }
 }
+
