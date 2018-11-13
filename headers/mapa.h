@@ -47,6 +47,7 @@ private:
     void addObstaculos(bool mod);
     void addPeatones();
 
+    void resetCamino();
     void setVecinosAt(int i, int j);
     void setVecinos();
     bool is_in_set(const Celda&, const std::vector<Celda>&);

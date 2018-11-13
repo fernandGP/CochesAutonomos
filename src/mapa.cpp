@@ -37,6 +37,13 @@ void Mapa::addPeatones(){
 
 }
 
+void Mapa::resetCamino(){
+    for(unsigned int i = 0; i < rejilla_.size(); i++)
+        for(unsigned int j = 0; j < rejilla_[i].size(); j++)
+            if(rejilla_[i][j].getValor() == 3)
+                rejilla_[i][j].setValor(0);
+}
+
 void Mapa::setVecinosAt(int i, int j){
     if(rejilla_[static_cast<unsigned int>(i)][static_cast<unsigned int>(j)].getValor() != 1){
         if(i-1 >= 0){
@@ -199,16 +206,20 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
 
 void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal){
 
+    resetCamino();
+
     if(rejilla_[xInicio][yInicio].getValor() == 1){
         rejilla_[xInicio][yInicio].setValor(0);
         setVecinosAt(static_cast<int>(xInicio), static_cast<int>(yInicio));
     }
     if(rejilla_[xFinal][yFinal].getValor() == 1){
        rejilla_[xFinal][yFinal].setValor(0);
-       //
+
     }
 
     vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
+
+    cout << "Tamano resultado: " << result.size() << endl;
 
     for(unsigned int i = 0; i < result.size(); i++){
         rejilla_[result[i].getX()][result[i].getY()].setValor(3);
