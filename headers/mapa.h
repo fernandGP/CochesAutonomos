@@ -3,6 +3,7 @@
 
 const int CONST_P_PEATONES  = 5;
 const int CONST_P_OBSTACULOS = 30;
+const int CAP_MAX_COCHE = 6;
 
 #include <vector>
 #include <sstream>
@@ -52,15 +53,18 @@ private:
     void setVecinos();
     bool is_in_set(const Celda&, const std::vector<Celda>&);
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
-    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
+    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal, double& time);
 public:
+    static int contador;
+
     Mapa(int x, int y, bool h, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_P_PEATONES);
     ~Mapa();
 
-    void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
+    void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal, int& pasajeros);
     void visualizar();
 
     void cambiarHeuristica(bool);
+
 };
 
 #endif // MAPA_H

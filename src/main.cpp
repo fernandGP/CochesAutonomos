@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-    int m,n,option;
+    int m,n,option, pasajeros = 1;
     cout << "--Dimensiones mapa--" << endl;
     cout << "Introduce largo: "; cin >> m; cout << endl;
     cout << "Introduce ancho:"; cin >> n; cout << endl;
@@ -38,12 +38,18 @@ int main(int argc, char *argv[])
             cin >> yFinal;
 
             cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Euclidea \n\n";
-            mapa.caminoMinimo(xInicio, yInicio, xFinal, yFinal);
+            mapa.caminoMinimo(xInicio, yInicio, xFinal, yFinal, pasajeros);
+            cout << "Pasajeros recogidos: " << pasajeros << endl;
+            cout << "Nodos generados: " << mapa.contador << endl;
 
             mapa.cambiarHeuristica(true);
+            pasajeros = 1;
+            mapa.contador = 0;
 
             cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Manhattan \n\n";
-            mapa.caminoMinimo(xInicio, yInicio, xFinal, yFinal);
+            mapa.caminoMinimo(xInicio, yInicio, xFinal, yFinal, pasajeros);
+            cout << "Pasajeros recogidos: " << pasajeros << endl;
+            cout << "Nodos generados: " << mapa.contador << endl;
 
         } catch (initException &e) {
             cout << e.what() << '\n';

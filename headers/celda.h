@@ -36,6 +36,8 @@ private:
 
 public:
 
+    static int contador;
+
     Celda();
     Celda(int x, int y, int valor = 0, int g = INT_MAX , int f = INT_MAX);
     ~Celda();
