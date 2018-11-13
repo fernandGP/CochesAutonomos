@@ -26,7 +26,16 @@ void Mapa::addObstaculos(bool mod){
     }
 }
 
-void Mapa::addPeatones(){}
+void Mapa::addPeatones(){
+       //Asignación automática
+    for(unsigned int i = 0; i < rejilla_.size(); i++){
+        for(unsigned int j = 0; j < rejilla_[i].size(); j++){
+            if((rand()%100 < nPeatones_) && (rejilla_[i][j].getValor() != 1))
+                rejilla_[i][j].setValor(2);
+        }
+    }
+
+}
 
 void Mapa::setVecinos(){        //Definitivamente necesitamos que sean enteros normales, asi que... C++11 type-cast
     for(int i = 0; static_cast<unsigned int>(i) < rejilla_.size(); i++){
@@ -62,7 +71,7 @@ Mapa::Mapa(int x, int y, bool h, int pObst, int nPeatones):x_(x), y_(y){
     if(pObst < 0) porcentajeObstaculos_ = CONST_P_OBSTACULOS;
     else porcentajeObstaculos_ = pObst;
 
-    if(nPeatones < 0) nPeatones_ = CONST_N_PEATONES;
+    if(nPeatones < 0) nPeatones_ = CONST_P_PEATONES;
     else nPeatones_ = nPeatones;
 
     if(h){ heuristica_ = new d_manhattan(); }
@@ -87,7 +96,9 @@ Mapa::Mapa(int x, int y, bool h, int pObst, int nPeatones):x_(x), y_(y){
     setVecinos();
 }
 
-Mapa::~Mapa(){}
+Mapa::~Mapa(){
+    delete heuristica_;
+}
 
 void Mapa::visualizar(){
 
@@ -184,6 +195,34 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
 
 void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal){
 
+    if(rejilla_[xInicio][yInicio].getValor() == 1){
+        rejilla_[xInicio][yInicio].setValor(0);
+        if(static_cast<int>(xInicio)-1 >= 0){
+            if(rejilla_[xInicio-1][yInicio].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio-1][yInicio]);
+            }
+        }
+        if(xInicio+1 < rejilla_.size()){
+            if(rejilla_[xInicio+1][yInicio].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio+1][yInicio]);
+            }
+        }
+        if(static_cast<int>(yInicio)-1 >= 0){
+            if(rejilla_[xInicio][yInicio-1].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio][yInicio-1]);
+            }
+        }
+        if(yInicio+1 < rejilla_[xInicio].size()){
+            if(rejilla_[xInicio][yInicio+1].getValor() != 1){
+                rejilla_[xInicio][yInicio].addVecino(rejilla_[xInicio][yInicio+1]);
+            }
+        }
+    }
+    if(rejilla_[xFinal][yFinal].getValor() == 1){
+       rejilla_[xFinal][yFinal].setValor(0);
+       //
+    }
+
     vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
 
     for(unsigned int i = 0; i < result.size(); i++){
@@ -193,4 +232,16 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
     cout << "\n\n" << endl;
 
     visualizar();
+}
+
+void Mapa::cambiarHeuristica(bool opt){
+    delete heuristica_;
+    if(opt){
+        //Manhattan
+        heuristica_ = new d_manhattan();
+    }
+    else{
+        //Euclidea
+        heuristica_ = new d_euclidea();
+    }
 }
