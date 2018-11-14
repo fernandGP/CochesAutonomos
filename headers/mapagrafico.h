@@ -47,7 +47,7 @@ private:
     vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 
 public:
-    explicit MapaGrafico(int x = 10, int y = 10, bool h = false, int pObst = CONST_P_OBSTACULOS, int nPeatones_ = CONST_P_PEATONES, bool opt = 0);
+    explicit MapaGrafico(int x = 10, int y = 10, bool h = false, int pObst = 10, int nPeatones_ = 10, bool opt = 0);
     virtual ~MapaGrafico();
 
     void caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);

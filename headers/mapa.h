@@ -53,7 +53,7 @@ private:
     void setVecinos();
     bool is_in_set(const Celda&, const std::vector<Celda>&);
     void reconstruir_camino(vector<Celda> &v, Celda actual, Celda I);
-    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal, double& time);
+    vector<Celda> Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal);
 public:
     static int contador;
 

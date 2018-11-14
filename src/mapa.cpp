@@ -147,15 +147,11 @@ void Mapa::reconstruir_camino(vector<Celda> &v, Celda actual, Celda I){
     }
 }
 
-vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal, double& time){
+vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal){
 
     vector<Celda> result;                                               // Almacena el camino optimo
     vector<Celda> setAbierto;
     vector<Celda> setCerrado;
-
-    unsigned t0, t1;
-
-    t0 = clock();
 
     Celda& Inicial = rejilla_[xInicio][yInicio];
     Celda& Final = rejilla_[xFinal][yFinal];
@@ -177,8 +173,6 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
         Celda actual = rejilla_[setAbierto[winner].getX()][setAbierto[winner].getY()];
 
         if((actual.getX() == xFinal) && (yFinal == actual.getY())){     //Es la misma celda -> Hemos llegado al final con camino óptimo
-            t1 = clock();
-            time = (double(t1-t0)/CLOCKS_PER_SEC);
             reconstruir_camino(result, actual, Inicial);
             return result;
         }
@@ -210,15 +204,12 @@ vector<Celda> Mapa::Astar(unsigned int xInicio, unsigned int yInicio, unsigned i
         }
     }
 
-    t1 = clock();
-    time = (double(t1-t0)/CLOCKS_PER_SEC);
-
     return result;
 }
 
 void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int xFinal, unsigned int yFinal, int& pasajeros){
 
-    double time;
+    long t0,t1;
     resetCamino();
 
     if(rejilla_[xInicio][yInicio].getValor() == 1){
@@ -241,7 +232,12 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
        }
     }
 
-    vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal,time);
+
+    t0 = clock();
+    vector<Celda> result = Astar(xInicio, yInicio, xFinal, yFinal);
+    t1 = clock();
+
+    double time = (double(t1-t0)/CLOCKS_PER_SEC);
 
     cout << "Tamano resultado: " << result.size() << endl
          << "Tiempo de ejecucion: " << time;
@@ -251,10 +247,11 @@ void Mapa::caminoMinimo(unsigned int xInicio, unsigned int yInicio, unsigned int
         for(int j = 0; j < result[i].sizeVecinos(); j++){
             if(rejilla_[result[i].getVecino(j).first][result[i].getVecino(j).second].getValor() == 3){
                 pasajeros++;
-                if(pasajeros >= CAP_MAX_COCHE) break;
+
             }
             if(pasajeros >= CAP_MAX_COCHE) break;
         }
+        if(pasajeros >= CAP_MAX_COCHE) break;
     }
 
     for(unsigned int i = 0; i < result.size(); i++){
