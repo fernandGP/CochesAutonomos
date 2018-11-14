@@ -1,3 +1,7 @@
+#ifdef _WIN32
+  #define WINPAUSE system("pause")
+#endif
+
 #include "../headers/mapa.h"
 #include "../headers/mainwindow.h"
 #include <QApplication>
@@ -50,6 +54,9 @@ int main(int argc, char *argv[])
             mapa.caminoMinimo(xInicio, yInicio, xFinal, yFinal, pasajeros);
             cout << "Pasajeros recogidos: " << pasajeros << endl;
             cout << "Nodos generados: " << mapa.contador << endl;
+
+            //while(getchar() != '\n');
+            WINPAUSE;
 
         } catch (initException &e) {
             cout << e.what() << '\n';
