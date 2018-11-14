@@ -43,12 +43,12 @@ void CeldaGrafica::setValor(int val){
     }
     case 1: {
         // Obstáculo
-        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/gato.png);");
+        setStyleSheet("border-image:url(:/assets/img/gato.png);");
         break;
     }
     case 2: {
         // Peatón
-        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/queso.png)");
+        setStyleSheet("border-image:url(:/assets/img/queso.png)");
         break;
     }
     case 3: {
@@ -57,12 +57,12 @@ void CeldaGrafica::setValor(int val){
         break;
     }
     case 4: {
-        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/mouse.gif)");
+        setStyleSheet("border-image:url(:/assets/img/mouse.gif)");
         break;
     }
     case 5: {
 
-        setStyleSheet("border-image:url(../CochesAutonomos/assets/img/puerta.png)");
+        setStyleSheet("border-image:url(:/assets/img/puerta.png)");
         break;
     }
     default: {

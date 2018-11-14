@@ -46,3 +46,6 @@ HEADERS += \
 
 FORMS += \
     forms/mainwindow.ui
+
+RESOURCES += \
+    assets.qrc

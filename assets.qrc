@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/coordenadas.txt</file>
+        <file>assets/img/gato.png</file>
+        <file>assets/img/mouse.gif</file>
+        <file>assets/img/puerta.png</file>
+        <file>assets/img/queso.png</file>
+    </qresource>
+</RCC>
